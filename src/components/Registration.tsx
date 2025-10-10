@@ -63,7 +63,16 @@ const Registration = () => {
         }),
       });
 
-      const result = await response.json();
+      let result;
+      const contentType = response.headers.get('content-type');
+      
+      if (contentType && contentType.includes('application/json')) {
+        result = await response.json();
+      } else {
+        const text = await response.text();
+        console.error('Non-JSON response:', text);
+        throw new Error('Server error: Please try again or contact support');
+      }
 
       if (!result.success) {
         throw new Error(result.error || 'Failed to submit registration');

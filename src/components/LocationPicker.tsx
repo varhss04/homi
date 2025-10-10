@@ -36,32 +36,62 @@ const LocationPicker = ({ onLocationSelect }: LocationPickerProps) => {
 
   const getCurrentLocation = () => {
     setLoading(true);
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        async (position) => {
-          const lat = position.coords.latitude;
-          const lng = position.coords.longitude;
-          setCenter([lat, lng]);
-          
-          // Reverse geocode to get address
-          try {
-            const response = await fetch(
-              `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
-            );
-            const data = await response.json();
-            onLocationSelect(lat, lng, data.display_name || "");
-          } catch (error) {
-            console.error("Error getting address:", error);
-            onLocationSelect(lat, lng, "");
-          }
-          setLoading(false);
-        },
-        (error) => {
-          console.error("Error getting location:", error);
-          setLoading(false);
-        }
-      );
+    
+    if (!navigator.geolocation) {
+      alert("Geolocation is not supported by your browser");
+      setLoading(false);
+      return;
     }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        setCenter([lat, lng]);
+        
+        // Reverse geocode to get address
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`,
+            {
+              headers: {
+                'User-Agent': 'Homi-Lunch-App'
+              }
+            }
+          );
+          const data = await response.json();
+          onLocationSelect(lat, lng, data.display_name || "");
+        } catch (error) {
+          console.error("Error getting address:", error);
+          onLocationSelect(lat, lng, "");
+        }
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error getting location:", error);
+        let errorMessage = "Unable to get location. ";
+        
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage += "Please allow location access in your browser.";
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage += "Location information unavailable.";
+            break;
+          case error.TIMEOUT:
+            errorMessage += "Location request timed out.";
+            break;
+        }
+        
+        alert(errorMessage);
+        setLoading(false);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      }
+    );
   };
 
   const handleMapClick = async (lat: number, lng: number) => {

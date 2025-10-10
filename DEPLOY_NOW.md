@@ -104,9 +104,15 @@ Vercel automatically redeploys! 🚀
 ## 🐛 Troubleshooting
 
 ### Registration fails?
-1. Check Vercel → Functions → Logs
-2. Verify MONGODB_URI in Vercel Settings → Environment Variables
-3. Check MongoDB Atlas → Network Access (must allow 0.0.0.0/0)
+1. **Check Vercel → Functions → Logs** (shows exact error)
+2. **Verify MONGODB_URI** in Vercel Settings → Environment Variables
+3. **Check MongoDB Atlas → Network Access** (must allow 0.0.0.0/0)
+4. **After any env variable change** → Redeploy (Settings → Deployments → Redeploy)
+
+### Map "Current Location" doesn't work?
+- Browser needs HTTPS (Vercel provides this automatically)
+- User must allow location permissions when prompted
+- Won't work on HTTP (localhost) - only on deployed HTTPS site
 
 ### Build fails?
 - Already tested - it works! ✅
@@ -114,6 +120,11 @@ Vercel automatically redeploys! 🚀
 
 ### Can't find project on Vercel?
 - Make sure GitHub repo is public OR Vercel has access
+
+### API returns HTML instead of JSON?
+- This means API route not found
+- Ensure you pushed `vercel.json` to GitHub
+- Redeploy after any config changes
 
 ## 📞 Need Help?
 

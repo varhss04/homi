@@ -20,7 +20,10 @@ export default async function handler(req, res) {
   try {
     await connectDB();
 
-    const { id } = req.query;
+    // Extract ID from URL path
+    const urlParts = req.url.split('/');
+    const id = urlParts[urlParts.length - 2]; // Gets ID from /api/registrations/{id}/payment
+    
     const { payment_screenshot_url } = req.body;
 
     const registration = await Registration.findByIdAndUpdate(
