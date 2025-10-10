@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/registrations/create",
+      "dest": "/api/registrations/create.js"
+    },
+    {
+      "src": "/api/registrations/(.*)/payment",
+      "dest": "/api/registrations/payment.js?id=$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ]
+}
