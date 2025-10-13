@@ -1,34 +1,23 @@
-const mongoose = require('mongoose');
+const { MongoClient } = require('mongodb');
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+let cachedClient = null;
+let cachedDb = null;
 
 async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
+  if (cachedDb) {
+    return cachedDb;
   }
 
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
+  if (!process.env.MONGODB_URI) {
+    throw new Error('MONGODB_URI is not defined');
   }
 
-  try {
-    cached.conn = await cached.promise;
-  } catch (e) {
-    cached.promise = null;
-    throw e;
-  }
+  const client = await MongoClient.connect(process.env.MONGODB_URI);
 
-  return cached.conn;
+  cachedClient = client;
+  cachedDb = client.db('homi_lunch');
+  
+  return cachedDb;
 }
 
 module.exports = connectDB;

@@ -1,8 +1,7 @@
 const connectDB = require('../utils/db');
-const Registration = require('../models/Registration');
+const { ObjectId } = require('mongodb');
 
 module.exports = async function handler(req, res) {
-  // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,25 +17,25 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    await connectDB();
+    const db = await connectDB();
 
-    // Extract ID from URL path
     const urlParts = req.url.split('/');
-    const id = urlParts[urlParts.length - 2]; // Gets ID from /api/registrations/{id}/payment
+    const id = urlParts[urlParts.length - 2];
     
     const { payment_screenshot_url } = req.body;
 
-    const registration = await Registration.findByIdAndUpdate(
-      id,
+    const result = await db.collection('registrations').updateOne(
+      { _id: new ObjectId(id) },
       {
-        payment_screenshot_url,
-        payment_status: 'submitted',
-        updated_at: new Date()
-      },
-      { new: true }
+        $set: {
+          payment_screenshot_url,
+          payment_status: 'submitted',
+          updated_at: new Date()
+        }
+      }
     );
 
-    if (!registration) {
+    if (result.matchedCount === 0) {
       return res.status(404).json({
         success: false,
         error: 'Registration not found'
@@ -54,7 +53,7 @@ module.exports = async function handler(req, res) {
     console.error('Error updating payment:', error);
     res.status(500).json({
       success: false,
-      error: error.message
+      error: error.message || 'Failed to update payment'
     });
   }
-}
+};

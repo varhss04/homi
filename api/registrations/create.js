@@ -1,8 +1,6 @@
 const connectDB = require('../utils/db');
-const Registration = require('../models/Registration');
 
 module.exports = async function handler(req, res) {
-  // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
@@ -18,7 +16,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    await connectDB();
+    const db = await connectDB();
 
     const registrationData = {
       parent_name: req.body.parent_name,
@@ -35,22 +33,21 @@ module.exports = async function handler(req, res) {
       created_at: new Date(),
     };
 
-    const registration = new Registration(registrationData);
-    await registration.save();
+    const result = await db.collection('registrations').insertOne(registrationData);
 
-    console.log('Registration saved:', registration._id);
+    console.log('Registration saved:', result.insertedId);
 
     res.status(201).json({
       success: true,
-      id: registration._id,
-      data: { ...registrationData, id: registration._id }
+      id: result.insertedId,
+      data: { ...registrationData, id: result.insertedId }
     });
 
   } catch (error) {
     console.error('Error saving registration:', error);
     res.status(500).json({
       success: false,
-      error: error.message
+      error: error.message || 'Failed to save registration'
     });
   }
-}
+};
