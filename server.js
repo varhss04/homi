@@ -35,7 +35,7 @@ async function connectDB() {
 
 connectDB();
 
-app.post('/api/registrations', async (req, res) => {
+app.post('/api/registrations/create', async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({
@@ -52,6 +52,7 @@ app.post('/api/registrations', async (req, res) => {
       email: req.body.email,
       address_line1: req.body.address_line1,
       address_line2: req.body.address_line2,
+      landmark: req.body.landmark,
       city: req.body.city,
       pincode: req.body.pincode,
       payment_status: 'pending',

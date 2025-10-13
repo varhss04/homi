@@ -1,7 +1,7 @@
-import connectDB from '../utils/db.js';
-import Registration from '../models/Registration.js';
+const connectDB = require('../utils/db');
+const Registration = require('../models/Registration');
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -28,6 +28,7 @@ export default async function handler(req, res) {
       email: req.body.email,
       address_line1: req.body.address_line1,
       address_line2: req.body.address_line2,
+      landmark: req.body.landmark,
       city: req.body.city,
       pincode: req.body.pincode,
       payment_status: 'pending',

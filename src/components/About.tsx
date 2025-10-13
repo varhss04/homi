@@ -1,11 +1,6 @@
 const About = () => {
   const benefits = [
     {
-      emoji: "🥗",
-      title: "Fresh & Healthy",
-      description: "Nutritious meals prepared daily"
-    },
-    {
       emoji: "⏰",
       title: "Save Time",
       description: "No more hectic mornings"
@@ -14,6 +9,11 @@ const About = () => {
       emoji: "🎯",
       title: "Reliable Delivery",
       description: "On-time, every time"
+    },
+    {
+      emoji: "🥗",
+      title: "Fresh & Healthy",
+      description: "Nutritious meals prepared daily"
     },
     {
       emoji: "🎓",

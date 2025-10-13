@@ -3,7 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Upload } from "lucide-react";
+import { API_BASE_URL } from "@/config/api";
+import { Upload, CheckCircle } from "lucide-react";
 
 const Payment = () => {
   const { toast } = useToast();
@@ -11,6 +12,7 @@ const Payment = () => {
   const location = useLocation();
   const [uploading, setUploading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
+  const [showSuccess, setShowSuccess] = useState(false);
   const registrationId = location.state?.registrationId;
 
   useEffect(() => {
@@ -49,7 +51,7 @@ const Payment = () => {
       reader.onload = async () => {
         const base64Image = reader.result as string;
 
-        const response = await fetch(`/api/registrations/${registrationId}/payment`, {
+        const response = await fetch(`${API_BASE_URL}/registrations/${registrationId}/payment`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -67,12 +69,8 @@ const Payment = () => {
 
         console.log('Payment screenshot uploaded to MongoDB:', result);
 
-        toast({
-          title: "Thank You for Choosing Homi!",
-          description: "Payment submitted successfully. All further updates will be shared via email and phone.",
-        });
-
-        setTimeout(() => navigate("/"), 3000);
+        setShowSuccess(true);
+        setTimeout(() => navigate("/"), 4000);
       };
 
       reader.onerror = () => {
@@ -91,6 +89,24 @@ const Payment = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center bg-background py-20">
+      {showSuccess && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white p-12 rounded-2xl shadow-2xl max-w-md mx-4 text-center animate-in fade-in zoom-in duration-500">
+            <div className="flex justify-center mb-6">
+              <CheckCircle className="h-20 w-20 text-green-500" />
+            </div>
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Thank You for Choosing Homi!
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Payment submitted successfully. All further updates will be shared via email and phone.
+            </p>
+            <div className="mt-6 text-sm text-muted-foreground">
+              Redirecting to home...
+            </div>
+          </div>
+        </div>
+      )}
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-12">
@@ -99,6 +115,9 @@ const Payment = () => {
             </h1>
             <p className="text-xl text-muted-foreground">
               Scan the QR code below and upload your payment screenshot
+            </p>
+            <p className="text-2xl font-bold text-primary mt-4">
+              Complimentary lunch bags are provided
             </p>
           </div>
 

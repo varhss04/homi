@@ -53,24 +53,6 @@ const Hero = () => {
               Learn More
             </Button>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
-            <div className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-2">🥗</div>
-              <h3 className="font-semibold text-lg mb-2">Fresh & Healthy</h3>
-              <p className="text-muted-foreground">Nutritious meals prepared daily</p>
-            </div>
-            <div className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-2">⏰</div>
-              <h3 className="font-semibold text-lg mb-2">Save Time</h3>
-              <p className="text-muted-foreground">No more hectic mornings</p>
-            </div>
-            <div className="bg-card p-6 rounded-lg border border-border hover:shadow-lg transition-shadow">
-              <div className="text-4xl mb-2">🎯</div>
-              <h3 className="font-semibold text-lg mb-2">Reliable Delivery</h3>
-              <p className="text-muted-foreground">On-time, every time</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>

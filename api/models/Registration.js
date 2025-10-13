@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const RegistrationSchema = new mongoose.Schema({
   parent_name: { type: String, required: true },
@@ -8,6 +8,7 @@ const RegistrationSchema = new mongoose.Schema({
   email: { type: String, required: true },
   address_line1: { type: String },
   address_line2: { type: String },
+  landmark: { type: String },
   city: { type: String },
   pincode: { type: String },
   payment_status: { type: String, default: 'pending' },
@@ -16,4 +17,4 @@ const RegistrationSchema = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-export default mongoose.models.Registration || mongoose.model('Registration', RegistrationSchema);
+module.exports = mongoose.models.Registration || mongoose.model('Registration', RegistrationSchema);

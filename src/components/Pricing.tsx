@@ -47,11 +47,11 @@ const scrollToRegister = () => {
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground">Nutritious, balanced meals</span>
+                  <span className="text-foreground">Reliable and on-time service</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Check className="h-6 w-6 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-foreground">Reliable and on-time service</span>
+                  <span className="text-foreground">Complimentary lunchbag provided</span>
                 </li>
               </ul>
 

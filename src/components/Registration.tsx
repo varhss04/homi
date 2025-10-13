@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import LocationPicker from "@/components/LocationPicker";
+import { API_BASE_URL } from "@/config/api";
 import {
   Select,
   SelectContent,
@@ -27,6 +27,7 @@ const Registration = () => {
     addressLine2: "",
     city: "",
     pincode: "",
+    landmark: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,7 +46,7 @@ const Registration = () => {
     setLoading(true);
 
     try {
-      const response = await fetch('/api/registrations/create', {
+      const response = await fetch(`${API_BASE_URL}/registrations/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +61,7 @@ const Registration = () => {
           address_line2: formData.addressLine2,
           city: formData.city,
           pincode: formData.pincode,
+          landmark: formData.landmark,
         }),
       });
 
@@ -104,18 +106,6 @@ const Registration = () => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleLocationSelect = (lat: number, lng: number, address: string) => {
-    // Parse address from reverse geocoding
-    const addressParts = address.split(", ");
-    setFormData({
-      ...formData,
-      addressLine1: addressParts[0] || "",
-      addressLine2: addressParts[1] || "",
-      city: addressParts.find(part => part.includes("Bangalore")) || addressParts[addressParts.length - 3] || "",
-      pincode: addressParts.find(part => /^\d{6}$/.test(part)) || "",
     });
   };
 
@@ -214,8 +204,6 @@ const Registration = () => {
             <div className="space-y-4">
               <Label className="text-lg font-semibold">Delivery Address</Label>
               
-              <LocationPicker onLocationSelect={handleLocationSelect} />
-              
               <div className="space-y-2">
                 <Label htmlFor="addressLine1">Address Line 1</Label>
                 <Input
@@ -235,6 +223,17 @@ const Registration = () => {
                   value={formData.addressLine2}
                   onChange={handleChange}
                   placeholder="Street, Area"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="landmark">Landmark</Label>
+                <Input
+                  id="landmark"
+                  name="landmark"
+                  value={formData.landmark}
+                  onChange={handleChange}
+                  placeholder="Nearby landmark"
                 />
               </div>
 

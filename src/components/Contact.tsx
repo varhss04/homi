@@ -28,7 +28,7 @@ const Contact = () => {
                 <Mail className="h-8 w-8 text-primary" />
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">Email</h3>
-              <p className="text-muted-foreground">homidelivery@gmail.com</p>
+              <p className="text-muted-foreground">homi.delivers@gmail.com</p>
             </div>
 
             <div className="bg-card p-8 rounded-xl border border-border text-center hover:shadow-lg transition-shadow">
