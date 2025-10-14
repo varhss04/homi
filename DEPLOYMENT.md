@@ -39,7 +39,7 @@
    - Choose "Connect your application"
    - Copy the connection string:
    ```
-   mongodb+srv://homi_admin:<password>@cluster.mongodb.net/homi_lunch
+   mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
    ```
    - Replace `<password>` with your actual password
    - Replace `cluster` with your cluster name
@@ -48,7 +48,7 @@
 
 1. **Create .env.local file** (for local testing)
    ```bash
-   echo "MONGODB_URI=mongodb+srv://homi_admin:yourpassword@cluster.mongodb.net/homi_lunch" > .env.local
+   echo "MONGODB_URI=mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/" > .env.local
    ```
 
 2. **Install Vercel CLI** (optional, for local testing)
@@ -110,7 +110,7 @@
    - Click "Environment Variables"
    - Add:
      - Name: `MONGODB_URI`
-     - Value: `mongodb+srv://homi_admin:yourpassword@cluster.mongodb.net/homi_lunch`
+     - Value: `mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/`
    - Select all environments (Production, Preview, Development)
 
 5. **Deploy**

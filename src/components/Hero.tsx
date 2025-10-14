@@ -11,13 +11,13 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20 animate-in slide-in-from-bottom-4 duration-1000">
       {/* Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
           backgroundImage: `url(${heroImage})`,
-          opacity: 0.15
+          opacity: 0.3
         }}
       />
       
@@ -26,14 +26,24 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground leading-tight">
-            Fresh Lunches. Peace of Mind.{" "}
-            <span className="text-primary">Powered by Homi.</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto">
-            Helping parents save time and giving students fresh, healthy food delivered right to their school.
-          </p>
+          <div className="space-y-4">
+            <h1 className="text-7xl md:text-9xl font-light text-foreground leading-tight tracking-tight" style={{ fontFamily: "'Lato', sans-serif" }}>
+              <span className="text-primary">
+                <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-green-800 bg-clip-text text-transparent font-extrabold tracking-wide">
+                  Homi
+                </span>
+                <span className="font-light">.</span>
+              </span>
+            </h1>
+            
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground" style={{ fontFamily: "'Lato', sans-serif" }}>
+              Fresh lunches. Zero morning stress.
+            </h2>
+            
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-2" style={{ fontFamily: "'Lato', sans-serif" }}>
+              We pick up your home-cooked meals and deliver them to your child at school—fresh, safe, and right on time.
+            </p>
+          </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
             <Button

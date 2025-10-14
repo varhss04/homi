@@ -12,7 +12,7 @@ const scrollToRegister = () => {
 // This function is now handled by Registration component
 
   return (
-    <section id="pricing" className="py-20 bg-secondary/20">
+    <section id="pricing" className="py-20 bg-secondary/20 animate-in slide-in-from-bottom-4 duration-1000 delay-500">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">

@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = process.env.VITE_MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI;
 const client = new MongoClient(MONGODB_URI, {
   serverSelectionTimeoutMS: 5000
 });

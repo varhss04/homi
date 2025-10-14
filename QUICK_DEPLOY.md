@@ -34,9 +34,9 @@ git push -u origin main
 3. **Add Environment Variable**
    - Click "Environment Variables"
    - Name: `MONGODB_URI`
-   - Value: Your MongoDB connection string from .env
+   - Value: mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
      ```
-     mongodb+srv://homi_admin:%40nirudh1612@homireg.rm4lkkr.mongodb.net/homi_lunch?retryWrites=true&w=majority
+     mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
      ```
    - Click "Add"
 

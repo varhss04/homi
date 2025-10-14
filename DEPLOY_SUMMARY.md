@@ -50,12 +50,12 @@ homi-lunch-easy-main/
 
 ### For Local Development (.env.local)
 ```bash
-MONGODB_URI=mongodb+srv://homi_admin:%40nirudh1612@homireg.rm4lkkr.mongodb.net/homi_lunch?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
 ```
 
 ### For Vercel (Add in dashboard)
 ```
-MONGODB_URI = mongodb+srv://homi_admin:%40nirudh1612@homireg.rm4lkkr.mongodb.net/homi_lunch?retryWrites=true&w=majority
+MONGODB_URI = mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
 ```
 
 ## Quick Deploy Commands

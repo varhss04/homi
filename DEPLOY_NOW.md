@@ -49,7 +49,7 @@ git push -u origin main
    - Name: `MONGODB_URI`
    - Value:
    ```
-   mongodb+srv://homi_admin:%40nirudh1612@homireg.rm4lkkr.mongodb.net/homi_lunch?retryWrites=true&w=majority
+   mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
    ```
    - Click Add
 
@@ -72,7 +72,7 @@ vercel
 
 # Add environment variable
 vercel env add MONGODB_URI
-# Paste: mongodb+srv://homi_admin:%40nirudh1612@homireg.rm4lkkr.mongodb.net/homi_lunch?retryWrites=true&w=majority
+# Paste: mongodb+srv://homiadmin:anirudh1612homie@homi.s2ntijx.mongodb.net/
 
 # Deploy to production
 vercel --prod

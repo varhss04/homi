@@ -110,7 +110,7 @@ const Registration = () => {
   };
 
   return (
-    <section id="register" className="py-20 bg-background">
+    <section id="register" className="py-20 bg-background animate-in slide-in-from-bottom-4 duration-1000 delay-700">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">

@@ -1,6 +1,6 @@
 const Founder = () => {
   return (
-    <section className="py-20 bg-secondary/20">
+    <section className="py-20 bg-secondary/20 animate-in slide-in-from-bottom-4 duration-1000 delay-300">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
           <div className="bg-card p-8 md:p-12 rounded-2xl border border-border">

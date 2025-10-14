@@ -32,7 +32,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/homi_logo.jpg" alt="Homi Logo" className="h-16 w-16 object-contain" />
-            <span className="text-2xl font-bold text-primary">Homi</span>
+            <span className="text-2xl font-bold text-primary" style={{ fontFamily: "'Lato', sans-serif" }}>Homi</span>
           </div>
           
           <div className="hidden md:flex items-center gap-8">
