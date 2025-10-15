@@ -41,7 +41,7 @@ const Hero = () => {
             </h2>
             
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto pt-2" style={{ fontFamily: "'Lato', sans-serif" }}>
-              We pick up your home-cooked meals and deliver them to your child at school—fresh, safe, and right on time.
+              We pick up your home-cooked meals and deliver them to your child at school - fresh, safe, and right on time.
             </p>
           </div>
 

@@ -3,7 +3,7 @@ const Founder = () => {
     <section className="py-20 bg-secondary/20 animate-in slide-in-from-bottom-4 duration-1000 delay-300">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-card p-8 md:p-12 rounded-2xl border border-border">
+          <div className="bg-card p-8 md:p-12 rounded-2xl border-2 border-[#396859]">
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Meet the Founder
@@ -11,8 +11,12 @@ const Founder = () => {
             </div>
             
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="w-32 h-32 bg-accent rounded-full flex items-center justify-center text-6xl">
-                👨‍💼
+              <div className="w-36 h-36 bg-[#396859] rounded-full flex items-center justify-center">
+                <img
+                  src="/founderphoto.png"
+                  alt="Anirudh Muralidhar - Founder of Homi"
+                  className="w-32 h-32 rounded-full object-cover object-center object-top"
+                />
               </div>
               
               <div className="flex-1 text-center md:text-left">
