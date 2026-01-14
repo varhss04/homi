@@ -28,11 +28,11 @@ const scrollToRegister = () => {
             <div className="bg-card p-8 rounded-2xl border-2 border-primary shadow-xl">
               <div className="text-center mb-6">
                 <h3 className="text-2xl font-bold text-foreground mb-2">
-                  Trial Monthly Plan
+                  Trial Plan
                 </h3>
                 <div className="flex items-baseline justify-center gap-2">
-                  <span className="text-5xl font-bold text-primary">₹999</span>
-                  <span className="text-muted-foreground">/month</span>
+                  <span className="text-5xl font-bold text-primary line-through">₹999</span>
+                  <span className="text-4xl font-bold text-green-600">FREE!!</span>
                 </div>
               </div>
 

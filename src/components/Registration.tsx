@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { API_BASE_URL } from "@/config/api";
 import {
@@ -12,10 +12,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const Registration = () => {
   const { toast } = useToast();
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     parentName: "",
@@ -29,6 +36,7 @@ const Registration = () => {
     pincode: "",
     landmark: "",
   });
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -38,6 +46,15 @@ const Registration = () => {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!agreeToTerms) {
+      toast({
+        title: "Terms and Conditions",
+        description: "Please agree to the terms and conditions to continue.",
         variant: "destructive",
       });
       return;
@@ -83,13 +100,14 @@ const Registration = () => {
       console.log('Registration submitted to MongoDB:', result);
 
       toast({
-        title: "Registration Received!",
-        description: "Redirecting to payment page...",
+        title: "Thank you for registering!",
+        description: "Thankyou for registering with Homi, we will soon get in contact with you",
       });
 
+      // Refresh the page after a short delay to clear the form
       setTimeout(() => {
-        navigate("/payment", { state: { registrationId: result.id } });
-      }, 1000);
+        window.location.reload();
+      }, 2000);
     } catch (error: any) {
       console.error("Error submitting registration:", error);
       toast({
@@ -260,6 +278,106 @@ const Registration = () => {
                   />
                 </div>
               </div>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="terms"
+                checked={agreeToTerms}
+                onCheckedChange={setAgreeToTerms}
+              />
+              <Label htmlFor="terms" className="text-sm">
+                I agree to all the{" "}
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <button
+                      type="button"
+                      className="text-primary hover:underline font-medium"
+                    >
+                      terms and conditions
+                    </button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[600px] max-h-[80vh] overflow-y-auto">
+                    <DialogHeader>
+                      <DialogTitle className="text-primary text-xl font-bold">Homi – Parent Consent & Terms of Service (Trial Phase)</DialogTitle>
+                      <DialogDescription className="text-base">
+                        This consent is provided by the parent/guardian opting to use the lunch delivery service offered by Homi during the trial period.
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="py-4 space-y-4">
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">1. Nature of the Service</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Homi provides a lunch pickup and delivery service, wherein home-packed lunch bags are collected from designated pickup points and delivered to the school before lunch time, as per the agreed schedule. The service is optional and availed at the discretion of the parent/guardian.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">2. Trial Phase Disclaimer</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          The service is currently offered as a trial service for a limited period and limited number of users and is provided free of cost. Processes may be refined during the trial based on operational requirements and feedback.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">3. Timings & Delivery</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Pickup and delivery will be carried out within predefined time windows. While every effort will be made to ensure timely delivery, exact delivery times cannot be guaranteed.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">4. Unforeseen Delays & Circumstances</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Homi shall not be held responsible for delays or disruptions caused due to unforeseen or unavoidable circumstances including vehicle breakdowns, traffic congestion, weather conditions, road closures, strikes, or situations beyond reasonable operational control.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">5. Handling & Safety</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Lunch bags will be handled with reasonable care. Parents are responsible for proper packing and sealing of food containers. Homi does not inspect or verify food quality, quantity, or contents.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">6. School Coordination</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Lunch bags will be delivered to the designated drop-off area within the school, as approved by the school authorities. Students are required to collect their respective lunch bags from the designated drop-off area as instructed by the school officials. Homi's responsibility concludes upon delivery at the designated school location.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">7. Limitation of Liability</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Homi shall not be held liable for food spoilage, allergic reactions, health issues, or loss due to improper packing. In the event of a missed or delayed delivery, liability is limited to discontinuation of service for the day without further claims.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">8. Communication</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Parents agree to receive service-related communication via phone or messaging platforms for coordination purposes.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">9. Right to Modify or Discontinue</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          Homi reserves the right to modify procedures, restrict or discontinue the service, or suspend operations if required for safety or operational reasons.
+                        </p>
+                      </div>
+
+                      <div className="space-y-3">
+                        <h3 className="font-semibold text-primary">10. Consent</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          By registering for the service, the parent/guardian confirms that they have read, understood, and agreed to the above terms.
+                        </p>
+                      </div>
+                    </div>
+                  </DialogContent>
+                </Dialog>
+              </Label>
             </div>
 
             <Button type="submit" size="lg" className="w-full text-lg py-6 mt-8" disabled={loading}>

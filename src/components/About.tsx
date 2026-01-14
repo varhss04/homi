@@ -67,8 +67,8 @@ const About = () => {
     },
     {
       icon: "🥗",
-      title: "Fresh & Healthy",
-      description: "Nutritious meals prepared daily"
+      title: "Fresh and Hot",
+      description: "Students can enjoy fresh and hot home food right on time."
     },
     {
       icon: "🎓",

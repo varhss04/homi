@@ -27,14 +27,12 @@ const Hero = () => {
       <div className="container mx-auto px-4 py-20 relative z-10">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
-            <h1 className="text-7xl md:text-9xl font-light text-foreground leading-tight tracking-tight" style={{ fontFamily: "'Lato', sans-serif" }}>
-              <span className="text-primary">
-                <span className="bg-gradient-to-r from-green-700 via-emerald-600 to-green-800 bg-clip-text text-transparent font-extrabold tracking-wide">
-                  Homi
-                </span>
-                <span className="font-light">.</span>
-              </span>
-            </h1>
+            <div className="flex flex-col items-center gap-4">
+              <img src="/homi_logo.jpg" alt="Homi Logo" className="h-32 w-32 object-contain" />
+              <h1 className="text-5xl md:text-8xl font-bold text-primary" style={{ fontFamily: "'Lato', sans-serif" }}>
+                Homi
+              </h1>
+            </div>
             
             <h2 className="text-4xl md:text-5xl font-bold text-foreground" style={{ fontFamily: "'Lato', sans-serif" }}>
               Fresh lunches. Zero morning stress.
