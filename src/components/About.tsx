@@ -68,7 +68,7 @@ const About = () => {
     {
       icon: "🥗",
       title: "Fresh and Hot",
-      description: "Students can enjoy fresh and hot home food right on time."
+      description: "Students can enjoy fresh and hot home-cooked food right on time."
     },
     {
       icon: "🎓",
