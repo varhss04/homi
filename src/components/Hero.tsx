@@ -28,9 +28,9 @@ const Hero = () => {
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <div className="space-y-4">
             <div className="flex flex-col items-center gap-4">
-              <img src="/homi_logo.jpg" alt="Homi Logo" className="h-32 w-32 object-contain" />
+              
               <h1 className="text-5xl md:text-8xl font-bold text-primary" style={{ fontFamily: "'Lato', sans-serif" }}>
-                Homi
+                homi
               </h1>
             </div>
             

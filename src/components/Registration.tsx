@@ -37,15 +37,70 @@ const Registration = () => {
     landmark: "",
   });
   const [agreeToTerms, setAgreeToTerms] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Regex patterns
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^[6-9]\d{9}$/; // Indian phone number
+  const pincodeRegex = /^\d{6}$/;
+  const nameRegex = /^[a-zA-Z\s]+$/;
+
+  const validateField = (name: string, value: string) => {
+    let error = "";
+    switch (name) {
+      case "parentName":
+        if (!value.trim()) error = "Parent name is required.";
+        else if (!nameRegex.test(value)) error = "Parent name should contain only letters and spaces.";
+        break;
+      case "studentName":
+        if (!value.trim()) error = "Student name is required.";
+        else if (!nameRegex.test(value)) error = "Student name should contain only letters and spaces.";
+        break;
+      case "phone":
+        if (!value.trim()) error = "Phone number is required.";
+        else if (!phoneRegex.test(value)) error = "Please enter a valid 10-digit phone number";
+        break;
+      case "email":
+        if (!value.trim()) error = "Email is required.";
+        else if (!emailRegex.test(value)) error = "Please enter a valid email address.";
+        break;
+      case "pincode":
+        if (value.trim() && !pincodeRegex.test(value)) error = "Please enter a valid 6-digit pincode.";
+        break;
+      default:
+        break;
+    }
+    return error;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+    const error = validateField(name, value);
+    setErrors({
+      ...errors,
+      [name]: error,
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Basic validation
-    if (!formData.parentName || !formData.studentName || !formData.phone || !formData.email) {
+
+    // Validate all fields
+    const newErrors: Record<string, string> = {};
+    Object.keys(formData).forEach((key) => {
+      const error = validateField(key, formData[key as keyof typeof formData]);
+      if (error) newErrors[key] = error;
+    });
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
       toast({
-        title: "Missing Information",
-        description: "Please fill in all required fields.",
+        title: "Validation Error",
+        description: "Please correct the errors in the form.",
         variant: "destructive",
       });
       return;
@@ -79,6 +134,7 @@ const Registration = () => {
           city: formData.city,
           pincode: formData.pincode,
           landmark: formData.landmark,
+          terms_accepted: agreeToTerms,
         }),
       });
 
@@ -120,12 +176,7 @@ const Registration = () => {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+
 
   return (
     <section id="register" className="py-20 bg-background animate-in slide-in-from-bottom-4 duration-1000 delay-700">
@@ -152,6 +203,7 @@ const Registration = () => {
                   required
                   placeholder="Enter your name"
                 />
+                {errors.parentName && <p className="text-red-500 text-sm">{errors.parentName}</p>}
               </div>
 
               <div className="space-y-2">
@@ -164,6 +216,7 @@ const Registration = () => {
                   required
                   placeholder="Enter student's name"
                 />
+                {errors.studentName && <p className="text-red-500 text-sm">{errors.studentName}</p>}
               </div>
             </div>
 
@@ -203,6 +256,7 @@ const Registration = () => {
                   required
                   placeholder="Enter phone number"
                 />
+                {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
               </div>
             </div>
 
@@ -215,7 +269,7 @@ const Registration = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="parent.email@example.com"
+                placeholder="email@example.com"
               />
             </div>
 
@@ -276,6 +330,7 @@ const Registration = () => {
                     onChange={handleChange}
                     placeholder="Enter pincode"
                   />
+                  {errors.pincode && <p className="text-red-500 text-sm">{errors.pincode}</p>}
                 </div>
               </div>
             </div>
