@@ -83,7 +83,7 @@ const About = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-900 via-emerald-900 to-yellow-900 bg-clip-text text-transparent mb-6" style={{ fontFamily: "'Lato', sans-serif" }}>
-              About Homi
+              About homi
             </h2>
           </div>
 
